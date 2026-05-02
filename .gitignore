@@ -16,6 +16,9 @@ env/
 .env.*
 !.env.example
 
+# Notas locais (nunca versionar tokens / chaves)
+/txt
+
 # IDE / editor
 .idea/
 .vscode/
