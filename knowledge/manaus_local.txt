@@ -1,0 +1,71 @@
+Referência fixa para perguntas sobre locais na cidade de Manaus, Amazonas (AM). Todo o conteúdo abaixo refere-se apenas a Manaus; não usar para Belém, São Paulo, Rio de Janeiro ou outras cidades.
+
+--- SHOPPINGS E CENTROS COMERCIAIS ---
+
+Manauara Shopping — entre os mais conhecidos, área da Adrianópolis.
+
+Amazonas Shopping — também Amazonas Shopping Center.
+
+Shopping Ponta Negra — região da Ponta Negra.
+
+Sumaúma Park Shopping — zona Norte / entorno Cidade Nova (confirmar no mapa).
+
+Shopping Manaus Via Norte — zona Norte (Via Norte).
+
+Millennium Shopping — também grafado “Millenium” em textos antigos.
+
+Studio 5 Shopping — eventos e convenções em alguns materiais.
+
+Manaus Plaza Shopping.
+
+Shopping Cidade Leste.
+
+Shopping Grande Circular.
+
+Shopping São José.
+
+Arena Mall — confirmar horários no mapa.
+
+Shopping Phelippe Daou e Shopping Cecomiz — citados como galerias ou centros menores.
+
+“Melhor” shopping é subjetivo; comparar avaliações no Google Maps ou apps.
+
+--- PRAÇAS, LARGOS E ESPAÇOS PÚBLICOS (CENTRO E ENTORNO) ---
+
+Largo de São Sebastião — marco do centro histórico junto ao Teatro Amazonas; área de circulação e eventos culturais.
+
+Praça São Sebastião — associada ao entorno do Teatro Amazonas no centro histórico.
+
+Praça Dom Pedro II — praça tombada e citada em materiais do patrimônio em Manaus.
+
+Praça XV de Novembro — praça tradicional no centro de Manaus (confirmar nome/número em mapas oficiais se houver variação).
+
+Praça Heliodoro Balbi — popularmente chamada de Praça da Polícia.
+
+Praça Antônio Bittencourt — conhecida também como Praça do Congresso.
+
+Praça Deodoro — espaço público no centro.
+
+Praça da Saudade — citada em roteiros locais.
+
+Praça Adolpho Lisboa — próxima ao Mercado Adolpho Lisboa (centro histórico).
+
+Praça Bartolomeu Bueno da Silva — bairro Dom Pedro (confirmar no mapa).
+
+Praça IX de Novembro — citada em inventários de espaços públicos em Manaus.
+
+Mercado Adolpho Lisboa — mercado histórico (não é praça, mas ponto turístico central junto de praças do centro).
+
+Regras para o assistente: liste apenas nomes que aparecem neste documento quando a pergunta for sobre Manaus. Não misturar com Praça da Sé (São Paulo), Praça dos Três Poderes (Brasília), Marco Zero (Recife) ou outras cidades. Para “quais praças visitar”, sugira conferir mapas e a Prefeitura de Manaus / turismo oficial para horários e eventos.
+
+--- GEOGRAFIA: CIDADES E DISTÂNCIAS EM RELAÇÃO A MANAUS ---
+
+Manaus está na Amazônia; “cidade mais próxima” depende de **como se mede** (linha reta, rio, tempo de viagem, ponto de partida na cidade). **Não invente quilómetros**; fontes e rotas mudam (obras, balsas, etc.).
+
+A **Região Metropolitana de Manaus (RMM)** inclui, entre outros, municípios como **Iranduba**, **Careiro da Várzea** e **Rio Preto da Eva** — em geral **dezenas de quilómetros** por estrada em relação ao centro urbano (valores exatos: consultar mapa / IBGE / DER).
+
+**Presidente Figueiredo** é muito visitado (cachoeiras), também na área de influência turística da capital, com distância rodoviária da ordem de **~100 km** (confirmar rota atual).
+
+**Itacoatiara** é um município rio abaixo; **não** é “ao lado” do centro de Manaus — estão separados por **centenas de quilómetros** de rio/BR (ordem de grandeza **~260 km** ou mais conforme o traçado e o ponto de referência). **Nunca** diga que Itacoatiara fica a **25 km** de Manaus; isso é incorreto.
+
+Para comparar “qual é a mais próxima”, o assistente deve: (1) citar os municípios da RMM / contexto acima quando relevante; (2) dizer que km exatos dependem da rota e do ponto de partida; (3) recomendar **Google Maps**, mapas oficiais ou **cidades.ibge.gov.br** para números atualizados.
