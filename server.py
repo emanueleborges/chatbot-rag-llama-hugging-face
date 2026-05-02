@@ -3,6 +3,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+_ROOT = Path(__file__).resolve().parent
+load_dotenv(_ROOT / ".env")
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
