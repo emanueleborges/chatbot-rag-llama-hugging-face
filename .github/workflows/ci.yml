@@ -1,5 +1,5 @@
 # Testes sem secrets + build Docker (imagem final sem chaves embutidas).
-# Opcional: job de integração com Ollama real (só após configurar secrets no repositório).
+# Opcional: job de integração com Ollama — ver bloco comentado no final.
 name: CI
 
 on:
@@ -9,53 +9,53 @@ on:
     branches: [main, master]
 
 jobs:
-  # test:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Instalar dependências (incl. pytest)
+        run: pip install -r requirements-dev.txt
+
+      - name: Testes (roteamento + RAG local, sem API keys)
+        run: pytest
+
+      - name: Build imagem produção (sem .env na imagem)
+        run: docker build -t rag-chat:ci .
+
+      - name: Build estágio de testes na imagem
+        run: docker build --target ci -t rag-chat:test .
+
+  # Opcional: descomente o job abaixo, defina secrets OLLAMA_* e Variables no repositório.
+  # integration-ollama:
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #   needs: test
   #   runs-on: ubuntu-latest
+  #   env:
+  #     OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
+  #     OLLAMA_BASE_URL: ${{ vars.OLLAMA_BASE_URL }}
+  #     OLLAMA_MODEL: ${{ vars.OLLAMA_MODEL }}
   #   steps:
   #     - uses: actions/checkout@v4
-
   #     - uses: actions/setup-python@v5
   #       with:
   #         python-version: "3.12"
-  #         cache: pip
-  #         cache-dependency-path: |
-  #           requirements.txt
-      #       requirements-dev.txt
-
-      # - name: Instalar dependências (incl. pytest)
-      #   run: pip install -r requirements-dev.txt
-
-      # - name: Testes (roteamento + RAG local, sem API keys)
-      #   run: pytest
-
-      # - name: Build imagem produção (sem .env na imagem)
-      #   run: docker build -t rag-chat:ci .
-
-      # - name: Build estágio de testes na imagem
-      #   run: docker build --target ci -t rag-chat:test .
-
-  #Opcional: descomente e defina o secret OLLAMA_API_KEY no GitHub (Settings → Secrets).
-  #Desencadeia só em push à main, para não gastar quota em cada PR de fork.
-  integration-ollama:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository_owner != ''
-    needs: test
-    runs-on: ubuntu-latest
-   ps:
-      - uses: actions/checkout@v4
-      - env:
-      OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
-      OLLAMA_BASE_URL: ${{ vars.OLLAMA_BASE_URL }}
-      OLLAMA_MODEL: ${{ vars.OLLAMA_MODEL }}
-    ste uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-      - run: pip install -r requirements.txt
-      - name: Smoke LLM (falha se secret não existir)
-        run: python -c "
-          import os, asyncio
-          from chat_engine import process_chat
-          async def main():
-            r = await process_chat('diga apenas OK', [])
-            assert not r.get('error')
-          asyncio.run(main())
-          "
+  #     - run: pip install -r requirements.txt
+  #     - name: Smoke LLM
+  #       run: |
+  #         python -c "
+  #         import asyncio
+  #         from chat_engine import process_chat
+  #         async def main():
+  #             r = await process_chat('diga apenas OK', [])
+  #             assert not r.get('error')
+  #         asyncio.run(main())
+  #         "
