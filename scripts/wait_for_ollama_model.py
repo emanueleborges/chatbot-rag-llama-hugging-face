@@ -21,17 +21,19 @@ def _ready() -> bool:
 
 def _model_exists() -> bool:
     try:
-        r = httpx.post(f"{HOST}/api/show", json={"name": MODEL}, timeout=60.0)
+        r = httpx.post(f"{HOST}/api/show", json={"model": MODEL}, timeout=60.0)
         return r.status_code == 200
     except Exception:
         return False
 
 
 def _pull() -> None:
-    with httpx.stream("POST", f"{HOST}/api/pull", json={"name": MODEL}, timeout=900.0) as resp:
-        resp.raise_for_status()
-        for _ in resp.iter_lines():
-            pass
+    r = httpx.post(
+        f"{HOST}/api/pull",
+        json={"model": MODEL, "stream": False},
+        timeout=httpx.Timeout(900.0),
+    )
+    r.raise_for_status()
 
 
 def main() -> int:
