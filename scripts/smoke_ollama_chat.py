@@ -8,6 +8,11 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 _ROOT = Path(__file__).resolve().parent.parent
+# Garantir imports (ex.: `chat_engine`) quando se corre `python scripts/smoke_ollama_chat.py` no CI ou localmente.
+_root_str = str(_ROOT)
+if _root_str not in sys.path:
+    sys.path.insert(0, _root_str)
+
 load_dotenv(_ROOT / ".env")
 
 
