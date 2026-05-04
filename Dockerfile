@@ -1,5 +1,5 @@
 # RAG Chat — FastAPI + Chroma + Sentence-Transformers (imagem CPU ~2GB+ após build)
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-bookworm AS base
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -15,6 +15,14 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+# CI: docker build --target ci .  (não é estágio predefinido do compose; compose usa o último estágio)
+FROM base AS ci
+COPY requirements-dev.txt .
+RUN pip install --no-cache-dir -r requirements-dev.txt
+RUN pytest -q
+
+FROM base AS production
 
 EXPOSE 8000
 

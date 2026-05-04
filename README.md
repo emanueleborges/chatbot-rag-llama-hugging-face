@@ -80,6 +80,44 @@ copy .env.example .env   # Windows
 
 O ficheiro `.env` está no `.gitignore`. **Não** versionize tokens em notas ou ficheiros soltos na raiz do repositório.
 
+### Segredos: local, Docker e CI (recomendação)
+
+| Onde | O que fazer |
+|------|-------------|
+| **Máquina local** | Manter chaves só em `.env` (cópia de `.env.example`). |
+| **Docker Compose** | O `docker-compose.yml` **não** inclui ficheiros de secrets na imagem; passa variáveis com `${NOME:-valor_opcional}`. O Compose lê automaticamente o ficheiro **`.env`** na mesma pasta para interpolar esses valores — por isso precisa de um `.env` real no disco (não commitado). |
+| **GitHub Actions** | Definir **Secrets** no repositório e referenciar com `${{ secrets.NOME }}` no workflow. O workflow de CI **não** grava `.env` no repositório; corre testes sem chamar Ollama por omissão. |
+
+**Secrets sugeridos no GitHub** (Settings → Secrets and variables → Actions → *New repository secret*), alinhados ao `.env.example`:
+
+| Secret (exemplo) | Uso |
+|------------------|-----|
+| `OLLAMA_API_KEY` | Job opcional de integração ou deploy que fale com a API Ollama. |
+| `HF_API_TOKEN` | Pipelines que gerem imagens ou acedam ao Hub com autenticação. |
+
+Variáveis **não sensíveis** (URL pública do endpoint, nome do modelo) podem ir em **Variables** (`vars.OLLAMA_BASE_URL`, etc.).
+
+## Testes locais
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+Os testes cobrem **roteamento** e **RAG por termos** (ficheiros em `knowledge/`), sem rede nem API keys.
+
+## CI/CD (GitHub Actions)
+
+O ficheiro **`.github/workflows/ci.yml`** corre em **push** e **pull_request** para `main` / `master`:
+
+1. `pip install -r requirements-dev.txt` e **`pytest`**.
+2. **`docker build`** da imagem de **produção** (sem `.env` copiado para dentro — ver `.dockerignore`).
+3. **`docker build --target ci`** para executar **pytest dentro da imagem** (mesmo ambiente que o contentor).
+
+Forks: por omissão os **secrets não são expostos** a workflows de PR vindos de fork; o job de testes sem secrets continua a correr.
+
+**GitLab CI:** análogo — **Settings → CI/CD → Variables** (marcar *Masked*), e no `.gitlab-ci.yml` use `OLLAMA_API_KEY: $OLLAMA_API_KEY` com o mesmo `pytest` e `docker build`.
+
 ## Como executar
 
 ```bash
@@ -98,8 +136,8 @@ uvicorn server:app --host 127.0.0.1 --port 8000 --reload
 
 Requisito: [Docker](https://docs.docker.com/get-docker/) e Docker Compose v2.
 
-1. Copie variáveis: `copy .env.example .env` (Windows) ou `cp .env.example .env` e preencha pelo menos `OLLAMA_*` (nuvem) ou aponte para Ollama no **host** (ver abaixo).
-2. Na raiz do projeto:
+1. Crie **`.env`** na raiz: `copy .env.example .env` (Windows) ou `cp .env.example .env` e preencha `OLLAMA_*`, `HF_*`, etc. Este ficheiro serve para o **Compose interpolar** `${OLLAMA_API_KEY}` (e restantes) — **não** é copiado para dentro da imagem (`.dockerignore` inclui `.env`).
+2. Subir o serviço:
 
 ```bash
 docker compose up --build
@@ -107,20 +145,26 @@ docker compose up --build
 
 3. Abra **http://localhost:8000**
 
-O compose monta `./knowledge` no contentor (pode editar `.txt` no host), define `CHROMA_PATH=/data/chroma_db` com volume nomeado, e cache Hugging Face para embeddings. Está configurado `host.docker.internal` para falar com serviços no PC (ex.: Ollama local).
+O `docker-compose.yml` usa `build.target: production` (imagem final **sem** correr pytest). Volumes: `./knowledge`, `chroma_data` em `/data/chroma_db`, cache Hugging Face. `host.docker.internal` está disponível para Ollama no host.
 
-**Ollama a correr no Windows/Mac (fora do Docker):** no `.env` dentro do projecto (usado pelo compose):
+**Ollama no host (Windows/Mac):** no `.env`:
 
 ```env
 OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
 OLLAMA_API_KEY=ollama
 ```
 
-**Chroma dentro do contentor:** após alterar `knowledge/*.txt`, chame `POST http://localhost:8000/api/rag/ingest-chroma` ou execute ingest localmente com a mesma pasta `knowledge/`.
+**Testes na imagem (recomendado antes de publicar a imagem):**
 
-A imagem é grande (PyTorch + Chroma + dependências). O primeiro `docker compose build` pode demorar vários minutos.
+```bash
+docker build --target ci -t rag-chat:test .
+```
 
-Ficheiros: `Dockerfile`, `docker-compose.yml`, `.dockerignore`.
+**Chroma no contentor:** após alterar `knowledge/*.txt`, `POST http://localhost:8000/api/rag/ingest-chroma` ou `python ingest_chroma.py` no host (com a mesma pasta `knowledge/`).
+
+A imagem é grande (PyTorch + Chroma). O primeiro build pode demorar vários minutos.
+
+Ficheiros: `Dockerfile` (estágios `base`, `ci`, `production`), `docker-compose.yml`, `.dockerignore`.
 
 ## API HTTP
 
@@ -155,6 +199,9 @@ curl -s -X POST http://127.0.0.1:8000/api/chat ^
 ├── train_rag.py         # Validação da base RAG (CLI)
 ├── extract_pdf.py       # PDF oficial → .txt (chunks por página)
 ├── download_lenovo_pdfs.py  # PDFs → knowledge/pdf_source/ (URLs ou --page)
+├── requirements-dev.txt # pytest + deps (CI / desenvolvimento)
+├── tests/               # Testes pytest (roteamento, RAG)
+├── .github/workflows/ci.yml
 ├── llm_service.py       # Cliente OpenAI → Ollama
 ├── image_service.py     # HF + fallback Pollinations
 ├── image_prompt_enhance.py

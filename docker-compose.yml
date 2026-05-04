@@ -1,24 +1,31 @@
 # RAG Chat — subir: docker compose up --build
-# Copie .env.example para .env e preencha OLLAMA_* (ou aponte Ollama no host).
+#
+# Segredos: crie um ficheiro .env na raiz (a partir de .env.example). O Compose usa esse
+# ficheiro para interpolar ${VAR} abaixo — nada de API keys dentro da imagem Docker.
+#
+# Ollama no host (Windows/Mac): OLLAMA_BASE_URL=http://host.docker.internal:11434/v1 e OLLAMA_API_KEY=ollama
+
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
     image: rag-chat:local
     ports:
       - "8000:8000"
-    env_file:
-      - .env
     environment:
-      # Ollama no host (Windows/Mac Docker Desktop):
-      # OLLAMA_BASE_URL: http://host.docker.internal:11434/v1
-      # OLLAMA_API_KEY: ollama
       CHROMA_PATH: /data/chroma_db
+      OLLAMA_API_KEY: ${OLLAMA_API_KEY:-}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-https://ollama.com/v1}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-gpt-oss:20b}
+      HF_API_TOKEN: ${HF_API_TOKEN:-}
+      HF_IMAGE_MODEL: ${HF_IMAGE_MODEL:-runwayml/stable-diffusion-v1-5}
+      IMAGE_BACKEND: ${IMAGE_BACKEND:-auto}
+      CHROMA_EMBED_MODEL: ${CHROMA_EMBED_MODEL:-paraphrase-multilingual-MiniLM-L12-v2}
     volumes:
-      # Base textual editável no host
       - ./knowledge:/app/knowledge
-      # Persistir vetores Chroma entre reinícios
       - chroma_data:/data/chroma_db
-      # Cache de modelos Hugging Face / embeddings (opcional, acelera restarts)
       - hf_cache:/root/.cache/huggingface
     extra_hosts:
       - "host.docker.internal:host-gateway"
