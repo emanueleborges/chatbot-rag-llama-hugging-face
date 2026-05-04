@@ -113,6 +113,7 @@ O ficheiro **`.github/workflows/ci.yml`** corre em **push** e **pull_request** p
 1. `pip install -r requirements-dev.txt` e **`pytest`**.
 2. **`docker build`** da imagem de **produção** (sem `.env` copiado para dentro — ver `.dockerignore`).
 3. **`docker build --target ci`** para executar **pytest dentro da imagem** (mesmo ambiente que o contentor).
+4. **`integration-ollama`**: sobe o contentor **`ollama/ollama`**, faz pull de **`llama3.2:1b`**, corre **`scripts/wait_for_ollama_model.py`** e **`scripts/smoke_ollama_chat.py`**. Corre em **push** a `main`/`master`, ou em **Run workflow** manual (Actions → CI → Run workflow). **Não** corre em PRs (poupa tempo e quota).
 
 Forks: por omissão os **secrets não são expostos** a workflows de PR vindos de fork; o job de testes sem secrets continua a correr.
 
@@ -130,6 +131,32 @@ Alternativa explícita:
 
 ```bash
 uvicorn server:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Variáveis opcionais para o `main.py`: `UVICORN_HOST` (ex.: `0.0.0.0`), `UVICORN_PORT`, `UVICORN_RELOAD` (`0` para desativar *reload*).
+
+## Ollama (nuvem, PC ou Docker)
+
+O `llm_service` fala com qualquer API **OpenAI-compatível**. Resumo:
+
+| Cenário | `OLLAMA_BASE_URL` | `OLLAMA_API_KEY` | `OLLAMA_MODEL` (exemplo) |
+|---------|---------------------|------------------|----------------------------|
+| **Nuvem** [ollama.com](https://ollama.com) | `https://ollama.com/v1` | chave real | `gpt-oss:20b` ou o modelo da conta |
+| **Ollama no PC** | `http://127.0.0.1:11434/v1` | vazio ou `ollama` | modelo que fez `ollama pull` (ex.: `llama3.2:1b`) |
+| **App no Docker, Ollama no PC** | `http://host.docker.internal:11434/v1` | `ollama` | idem |
+| **App + Ollama ambos no Docker** | `http://ollama:11434/v1` | `ollama` | idem (ver ficheiro compose abaixo) |
+
+Com Ollama **local** ou **hostname `ollama`**, a API key pode ficar vazia: o código usa o placeholder **`ollama`**, que o servidor local aceita.
+
+**Smoke test local** (com Ollama a correr e modelo já puxado):
+
+```bash
+pip install -r requirements.txt
+set OLLAMA_BASE_URL=http://127.0.0.1:11434/v1
+set OLLAMA_API_KEY=ollama
+set OLLAMA_MODEL=llama3.2:1b
+python scripts/wait_for_ollama_model.py
+python scripts/smoke_ollama_chat.py
 ```
 
 ## Docker
@@ -152,7 +179,22 @@ O `docker-compose.yml` usa `build.target: production` (imagem final **sem** corr
 ```env
 OLLAMA_BASE_URL=http://host.docker.internal:11434/v1
 OLLAMA_API_KEY=ollama
+OLLAMA_MODEL=llama3.2:1b
 ```
+
+**Ollama dentro do Docker (recomendado para tudo numa stack):** use o segundo ficheiro de compose (sobe `ollama/ollama` e aponta a app para o serviço `ollama`):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ollama.yml up --build
+```
+
+Na primeira vez, no contentor Ollama ainda pode não ter o modelo. Noutro terminal:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ollama.yml exec ollama ollama pull llama3.2:1b
+```
+
+(Ou defina `OLLAMA_MODEL` no `.env` para o mesmo nome que fez `pull`.)
 
 **Testes na imagem (recomendado antes de publicar a imagem):**
 
@@ -164,7 +206,7 @@ docker build --target ci -t rag-chat:test .
 
 A imagem é grande (PyTorch + Chroma). O primeiro build pode demorar vários minutos.
 
-Ficheiros: `Dockerfile` (estágios `base`, `ci`, `production`), `docker-compose.yml`, `.dockerignore`.
+Ficheiros: `Dockerfile` (estágios `base`, `ci`, `production`), `docker-compose.yml`, `docker-compose.ollama.yml`, `.dockerignore`, `scripts/smoke_ollama_chat.py`, `scripts/wait_for_ollama_model.py`.
 
 ## API HTTP
 
@@ -202,6 +244,10 @@ curl -s -X POST http://127.0.0.1:8000/api/chat ^
 ├── requirements-dev.txt # pytest + deps (CI / desenvolvimento)
 ├── tests/               # Testes pytest (roteamento, RAG)
 ├── .github/workflows/ci.yml
+├── scripts/
+│   ├── smoke_ollama_chat.py   # Smoke LLM (Ollama)
+│   └── wait_for_ollama_model.py
+├── docker-compose.ollama.yml  # Stack app + Ollama
 ├── llm_service.py       # Cliente OpenAI → Ollama
 ├── image_service.py     # HF + fallback Pollinations
 ├── image_prompt_enhance.py
