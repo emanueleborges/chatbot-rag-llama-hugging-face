@@ -1,0 +1,29 @@
+# RAG Chat — subir: docker compose up --build
+# Copie .env.example para .env e preencha OLLAMA_* (ou aponte Ollama no host).
+services:
+  app:
+    build: .
+    image: rag-chat:local
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # Ollama no host (Windows/Mac Docker Desktop):
+      # OLLAMA_BASE_URL: http://host.docker.internal:11434/v1
+      # OLLAMA_API_KEY: ollama
+      CHROMA_PATH: /data/chroma_db
+    volumes:
+      # Base textual editável no host
+      - ./knowledge:/app/knowledge
+      # Persistir vetores Chroma entre reinícios
+      - chroma_data:/data/chroma_db
+      # Cache de modelos Hugging Face / embeddings (opcional, acelera restarts)
+      - hf_cache:/root/.cache/huggingface
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  chroma_data:
+  hf_cache:

@@ -5,11 +5,12 @@ import asyncio
 
 from image_service import generate_image_b64
 from llm_service import chat_completion
-from rag_service import load_chunks, retrieve
+from rag_service import get_chunks, retrieve_hybrid
 from routing import extract_image_prompt, route_message
 
 ROUTE_LABELS = {
     "rag": "📄 RAG — Documentos Dell",
+    "rag_lenovo": "📄 RAG — Documentos Lenovo",
     "rag_manaus": "📄 RAG — Manaus (local)",
     "llm": "🤖 LLM — Ollama",
     "image": "🎨 Imagem — HF ou Pollinations",
@@ -35,15 +36,6 @@ _SYSTEM_LLM = (
     "sites oficiais ou avaliações recentes na própria cidade. Se não tiver informação confiável "
     "sobre aquele lugar, admita e evite listar estabelecimentos que possam ser de outra cidade."
 )
-
-_chunks_cache: dict[str, list[str]] = {}
-
-
-def get_chunks(filename: str = "dell_knowledge.txt") -> list[str]:
-    if filename not in _chunks_cache:
-        _chunks_cache[filename] = load_chunks(filename)
-    return _chunks_cache[filename]
-
 
 async def process_chat(text: str, history: list[dict]) -> dict:
     """
@@ -97,9 +89,32 @@ async def process_chat(text: str, history: list[dict]) -> dict:
                 f"{_SYSTEM_MANAUS}\n\n--- CONTEXTO (Manaus, AM) ---\n{context}\n--- FIM DO CONTEXTO ---"
             )
             messages = [{"role": "system", "content": system}] + prior + [{"role": "user", "content": text}]
+        elif route == "rag_lenovo":
+            chunks = get_chunks("lenovo_knowledge.txt")
+            if not chunks:
+                reply = (
+                    "Base **Lenovo** não encontrada no servidor (`knowledge/lenovo_knowledge.txt`). "
+                    "Peça ao administrador para verificar o ficheiro."
+                )
+                return {
+                    "content": reply,
+                    "route": route,
+                    "route_label": label,
+                    "image": None,
+                    "error": True,
+                }
+            picked = retrieve_hybrid(text, "lenovo_knowledge.txt", chunks, top_k=4)
+            context = "\n\n".join(picked) if picked else "(sem trechos recuperados)"
+            system = (
+                "Você é um assistente especializado em produtos e suporte Lenovo. "
+                "Use principalmente o contexto abaixo (documentos internos). "
+                "Se algo não constar no contexto, diga honestamente. Responda em português do Brasil.\n\n"
+                f"--- CONTEXTO ---\n{context}\n--- FIM DO CONTEXTO ---"
+            )
+            messages = [{"role": "system", "content": system}] + prior + [{"role": "user", "content": text}]
         elif route == "rag":
             chunks = get_chunks("dell_knowledge.txt")
-            picked = retrieve(text, chunks, top_k=4)
+            picked = retrieve_hybrid(text, "dell_knowledge.txt", chunks, top_k=4)
             context = "\n\n".join(picked) if picked else "(sem trechos recuperados)"
             system = (
                 "Você é um assistente especializado em produtos e suporte Dell. "

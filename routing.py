@@ -1,4 +1,4 @@
-"""Roteamento automático: imagem, RAG Dell ou LLM geral."""
+"""Roteamento automático: imagem, RAG Dell/Lenovo/Manaus ou LLM geral."""
 import re
 
 _IMAGE_STRICT = re.compile(
@@ -154,9 +154,35 @@ _DELL = (
     "dell technologies",
 )
 
+_LENOVO = (
+    "lenovo",
+    "le novo",
+    "leno vo",
+    "thinkpad",
+    "think book",
+    "thinkbook",
+    "ideapad",
+    "legion",
+    "yoga lenovo",
+    "lenovo yoga",
+    "thinkcentre",
+    "think center",
+    "thinkstation",
+    "think station",
+    "thinkvision",
+    "think vision",
+    "notebook lenovo",
+    "pc lenovo",
+    "computador lenovo",
+    "computadores lenovo",
+    "lenovo brasil",
+    "suporte lenovo",
+    "lenovo vantage",
+)
+
 
 def route_message(text: str) -> str:
-    """Retorna 'image' | 'rag_manaus' | 'rag' | 'llm'."""
+    """Retorna 'image' | 'rag_manaus' | 'rag_lenovo' | 'rag' | 'llm'."""
     t = (text or "").strip()
     if not t:
         return "llm"
@@ -165,6 +191,8 @@ def route_message(text: str) -> str:
     if manaus_local_intent(t):
         return "rag_manaus"
     low = t.lower()
+    if any(k in low for k in _LENOVO):
+        return "rag_lenovo"
     if any(k in low for k in _DELL):
         return "rag"
     return "llm"

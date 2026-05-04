@@ -15,6 +15,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from chat_engine import process_chat
+from rag_service import clear_chunks_cache, corpus_stats
 
 STATIC = Path(__file__).resolve().parent / "static"
 
@@ -40,7 +41,53 @@ app.add_middleware(
 
 @app.get("/api/health")
 def health():
-    return {"status": "ok", "app": "RAG Chat"}
+    out: dict = {"status": "ok", "app": "RAG Chat"}
+    try:
+        from vector_store import chroma_count
+
+        n = chroma_count()
+        if n is not None:
+            out["chroma_chunks"] = n
+    except ImportError:
+        out["chroma_chunks"] = None
+    except Exception:
+        out["chroma_chunks"] = None
+    return out
+
+
+@app.post("/api/rag/reload")
+def rag_reload():
+    """Limpa cache de chunks e devolve estatísticas da pasta knowledge/ (após editar .txt)."""
+    clear_chunks_cache()
+    payload: dict = {"ok": True, "corpus": corpus_stats()}
+    try:
+        from vector_store import chroma_count
+
+        payload["chroma_chunks"] = chroma_count()
+    except Exception:
+        payload["chroma_chunks"] = None
+    return payload
+
+
+@app.post("/api/rag/ingest-chroma")
+async def rag_ingest_chroma():
+    """Reindexa todos os knowledge/*.txt no Chroma (pode demorar na 1ª vez — download do modelo)."""
+    import asyncio
+
+    try:
+        from vector_store import ingest_all_knowledge_txt, reset_vector_store
+    except ImportError:
+        return {
+            "ok": False,
+            "error": "Dependências Chroma em falta. Execute: pip install -r requirements.txt",
+        }
+    try:
+        report = await asyncio.to_thread(ingest_all_knowledge_txt)
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
+    reset_vector_store()
+    clear_chunks_cache()
+    return {"ok": True, **report}
 
 
 @app.post("/api/chat")
