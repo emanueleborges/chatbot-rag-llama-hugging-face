@@ -41,6 +41,10 @@ htmlcov/
 # PDFs oficiais locais (grandes / licença — não versionar por omissão)
 knowledge/pdf_source/*.pdf
 
+# Uploads e base textual gerada/local (opcional no Git)
+knowledge/pdf_uploads/
+knowledge/ev_knowledge.txt
+
 # Chroma persistido (embeddings locais)
 chroma_db/
 
