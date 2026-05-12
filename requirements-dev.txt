@@ -1,3 +1,0 @@
-# Desenvolvimento e CI (não obrigatório em produção)
--r requirements.txt
-pytest>=8.0
