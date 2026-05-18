@@ -1,0 +1,61 @@
+# Ollama no Mac: use o app nativo (porta 11434) — não suba o serviço `ollama` abaixo.
+# Os containers ligam via host.docker.internal:11434 (defeito).
+#
+# Só se NÃO tiver Ollama no host:
+#   docker compose --profile docker-ollama up -d
+#   export OLLAMA_URL=http://ollama:11434
+
+services:
+  ollama:
+    profiles: ["docker-ollama"]
+    image: ollama/ollama:latest
+    ports:
+      - "11435:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8011:8011"
+    environment:
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2:3b}
+      HOST: "0.0.0.0"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+      - ./chroma_db:/app/chroma_db
+      - ./models:/app/models
+    command: python -m backend.app
+
+  gradio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7861:7861"
+    environment:
+      OLLAMA_URL: ${OLLAMA_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-llama3.2:3b}
+      GRADIO_PORT: "7861"
+      GRADIO_SERVER_NAME: "0.0.0.0"
+      HF_HOME: /app/.cache/huggingface
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./backend:/app/backend
+      - ./frontend:/app/frontend
+      - ./data:/app/data
+      - ./chroma_db:/app/chroma_db
+      - huggingface_cache:/app/.cache/huggingface
+    restart: unless-stopped
+    command: python frontend/gradio_app.py
+
+volumes:
+  ollama_data:
+  huggingface_cache:

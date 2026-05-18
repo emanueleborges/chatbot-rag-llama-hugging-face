@@ -1,0 +1,395 @@
+{
+  "tipo_busca": null,
+  "size_por_tribunal": 2,
+  "tribunais": {
+    "tjsp": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "40075646420258260008",
+          "classe_codigo": 93,
+          "classe_nome": "Despejo por Falta de Pagamento",
+          "grau": "G1",
+          "data_ajuizamento": "20251111171130",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 11690,
+          "orgao_nome": "Juízo Titular I - 5ª Vara Cível - Regional VIII - Tatuapé",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjsp"
+        },
+        {
+          "numero_processo": "40047013720268260482",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20260327182038",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 10126,
+          "orgao_nome": "Juízo Titular I - 5ª Vara Cível da Comarca de Presidente Prudente",
+          "assuntos": [
+            {
+              "codigo": 9612,
+              "nome": "Despejo por Denúncia Vazia"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjsp"
+        }
+      ]
+    },
+    "tjrj": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "30379406620258190001",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20251202172041",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 7319,
+          "orgao_nome": "8ª Vara Cível da Comarca da Capital",
+          "assuntos": [
+            {
+              "codigo": 10582,
+              "nome": "Rescisão / Resolução"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjrj"
+        },
+        {
+          "numero_processo": "30380263720258190001",
+          "classe_codigo": 93,
+          "classe_nome": "Despejo por Falta de Pagamento",
+          "grau": "G1",
+          "data_ajuizamento": "20251202193412",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 7423,
+          "orgao_nome": "1ª Vara Cível da Regional de Jacarepaguá",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjrj"
+        }
+      ]
+    },
+    "tjmg": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "50006717320238130460",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20230321172633",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 3949,
+          "orgao_nome": "2ª Vara Cível, Criminal e da Infância e da Juventude da Comarca de Ouro Fino",
+          "assuntos": [
+            {
+              "codigo": 9612,
+              "nome": "Despejo por Denúncia Vazia"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjmg"
+        },
+        {
+          "numero_processo": "50212693320258130701",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20250709110457",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 4355,
+          "orgao_nome": "5ª Vara Cível da Comarca de Uberaba",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjmg"
+        }
+      ]
+    },
+    "tjdft": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "07091196120268070001",
+          "classe_codigo": 93,
+          "classe_nome": "Despejo por Falta de Pagamento",
+          "grau": "G1",
+          "data_ajuizamento": "20260224162925",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 6564,
+          "orgao_nome": "7? VARA C?VEL DE BRAS?LIA",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjdft"
+        },
+        {
+          "numero_processo": "07029942920268070017",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20260409175231",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 16281,
+          "orgao_nome": "VARA C?VEL DO RIACHO FUNDO",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjdft"
+        }
+      ]
+    },
+    "tjrs": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "50073018120258210031",
+          "classe_codigo": 93,
+          "classe_nome": "Despejo por Falta de Pagamento",
+          "grau": "G1",
+          "data_ajuizamento": "20251104164840",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 3213,
+          "orgao_nome": "2ª Vara Cível da Comarca de São Gabriel",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            },
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjrs"
+        },
+        {
+          "numero_processo": "50012627720178215001",
+          "classe_codigo": 93,
+          "classe_nome": "Despejo por Falta de Pagamento",
+          "grau": "G1",
+          "data_ajuizamento": "20170609000000",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 3742,
+          "orgao_nome": "1ª Vara Cível do Foro Regional da Zona Norte da Comarca de Porto Alegre",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjrs"
+        }
+      ]
+    },
+    "tjpr": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "00003092020238160058",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20230116215258",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 8884,
+          "orgao_nome": "CAMPO MOURÃO - 2ª VARA CÍVEL E DA FAZENDA PÚBLICA",
+          "assuntos": [
+            {
+              "codigo": 10582,
+              "nome": "Rescisão / Resolução"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjpr"
+        },
+        {
+          "numero_processo": "00301909720258160017",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20251111150043",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 13785,
+          "orgao_nome": "MARINGÁ - 7ª VARA CÍVEL",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjpr"
+        }
+      ]
+    },
+    "tjba": {
+      "total_aproximado": "10000+",
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "01648759620058050001",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20051228000000",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 17176,
+          "orgao_nome": "9ª VARA CÍVEL E COMERCIAL",
+          "assuntos": [
+            {
+              "codigo": 9593,
+              "nome": "Locação de Imóvel"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjba"
+        },
+        {
+          "numero_processo": "80007336120268050078",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20260304000000",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 4558,
+          "orgao_nome": "2ª VARA DE FEITOS DE REL DE CONS. CÍVEL E COMERCIAIS",
+          "assuntos": [
+            {
+              "codigo": 9587,
+              "nome": "Compra e Venda"
+            },
+            {
+              "codigo": 9610,
+              "nome": "Despejo para Uso Próprio"
+            }
+          ],
+          "score": null,
+          "tribunal": "tjba"
+        }
+      ]
+    },
+    "trf1": {
+      "total_aproximado": 77,
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "10059455720264013400",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20260122165501",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 17627,
+          "orgao_nome": "14ª - Brasília",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "trf1"
+        },
+        {
+          "numero_processo": "10945496220244013400",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20241121170909",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 17632,
+          "orgao_nome": "02ª - Brasília",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "trf1"
+        }
+      ]
+    },
+    "trf3": {
+      "total_aproximado": 332,
+      "retornados": 2,
+      "processos": [
+        {
+          "numero_processo": "50182815320254036100",
+          "classe_codigo": 94,
+          "classe_nome": "Despejo por Falta de Pagamento Cumulado Com Cobrança",
+          "grau": "G1",
+          "data_ajuizamento": "20250701170752",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 12951,
+          "orgao_nome": "26ª VARA FEDERAL CÍVEL DE SÃO PAULO",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "trf3"
+        },
+        {
+          "numero_processo": "50169512120254036100",
+          "classe_codigo": 92,
+          "classe_nome": "Despejo",
+          "grau": "G1",
+          "data_ajuizamento": "20250617180039",
+          "nivel_sigilo": 0,
+          "orgao_codigo": 12931,
+          "orgao_nome": "05ª VARA FEDERAL CÍVEL DE SÃO PAULO",
+          "assuntos": [
+            {
+              "codigo": 14915,
+              "nome": "Despejo por Inadimplemento"
+            }
+          ],
+          "score": null,
+          "tribunal": "trf3"
+        }
+      ]
+    }
+  },
+  "erros": {},
+  "total_processos": 18,
+  "aviso": "Metadados DataJud — sem petição inicial. Tribunais: tjsp, tjrj, tjmg, tjdft, tjrs, tjpr, tjba, trf1, trf3."
+}

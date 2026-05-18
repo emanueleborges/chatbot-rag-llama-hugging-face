@@ -1,0 +1,150 @@
+{
+  "status": "ok",
+  "treinado_em": "2026-05-18T18:58:47.108444+00:00",
+  "pasta": "/Users/emanuelborges/Projetos/IA/projeto-tcc-juridico/data/knowledge",
+  "reset_aplicado": true,
+  "ficheiros_indexados": 27,
+  "total_chunks": 934,
+  "detalhes": [
+    {
+      "arquivo": "001-trata--se-de-acao-de-indenizacao-por-dano-material-e-dano-moral-8f86749a.pdf",
+      "chunks": 30,
+      "caracteres": 16397
+    },
+    {
+      "arquivo": "002-acordao-8fdcfcee.pdf",
+      "chunks": 34,
+      "caracteres": 31290
+    },
+    {
+      "arquivo": "003-tjpb---2o-grau---processo-judicial-eletronico---migalhas-f4fb941b.pdf",
+      "chunks": 17,
+      "caracteres": 14942
+    },
+    {
+      "arquivo": "004-decisao-25354545.pdf",
+      "chunks": 20,
+      "caracteres": 19199
+    },
+    {
+      "arquivo": "005-vol.35.indd-d5e3f71f.pdf",
+      "chunks": 234,
+      "caracteres": 291425
+    },
+    {
+      "arquivo": "006-relator-34edf23a.pdf",
+      "chunks": 32,
+      "caracteres": 32106
+    },
+    {
+      "arquivo": "007-apelacao-civel.-direito-do-consumidor.-acao-...---migalhas-371a26ab.pdf",
+      "chunks": 26,
+      "caracteres": 26968
+    },
+    {
+      "arquivo": "008-processo-0005059-39.2019.8.14.0130---apelacao-civel-60642620.pdf",
+      "chunks": 40,
+      "caracteres": 43838
+    },
+    {
+      "arquivo": "009-processo-no-0804217-52.2015.4.05.0000---apelacao-3962be7e.pdf",
+      "chunks": 22,
+      "caracteres": 19997
+    },
+    {
+      "arquivo": "010-ementa---migalhas-7a19eb7b.pdf",
+      "chunks": 31,
+      "caracteres": 33565
+    },
+    {
+      "arquivo": "011-tribunal-de-justica-de-minas-gerai-17d76e66.pdf",
+      "chunks": 25,
+      "caracteres": 24004
+    },
+    {
+      "arquivo": "012-tribunal-de-justica-de-minas-gerai-a664b942.pdf",
+      "chunks": 23,
+      "caracteres": 19561
+    },
+    {
+      "arquivo": "013-tribunal-de-justica-de-minas-gerai---migalhas-e9727211.pdf",
+      "chunks": 24,
+      "caracteres": 18578
+    },
+    {
+      "arquivo": "014-despacho-decisao-1438c440.pdf",
+      "chunks": 20,
+      "caracteres": 17233
+    },
+    {
+      "arquivo": "015-tribunal-de-justica-de-minas-gerais---tjmg.jus.br-4bc5dd56.pdf",
+      "chunks": 22,
+      "caracteres": 26234
+    },
+    {
+      "arquivo": "016-excelentissimo-senhor-doutor-juiz-de-direito-da-vara-c9611549.pdf",
+      "chunks": 21,
+      "caracteres": 24071
+    },
+    {
+      "arquivo": "017-processo-n-1004048-69.2021.8.26.0609-procedimento-comum-civel-d3c6073c.pdf",
+      "chunks": 15,
+      "caracteres": 14095
+    },
+    {
+      "arquivo": "018-dano-moral-e-pedido-generico-de-indenizacao-f75adb5f.pdf",
+      "chunks": 46,
+      "caracteres": 59532
+    },
+    {
+      "arquivo": "019-sentenca-9d786f09.pdf",
+      "chunks": 26,
+      "caracteres": 18230
+    },
+    {
+      "arquivo": "020-sentenca-1003979-03.2021.8.26.0006-procedimento-comum-civel-0b57df74.pdf",
+      "chunks": 16,
+      "caracteres": 15381
+    },
+    {
+      "arquivo": "021-excelentissimo-senhor-doutor-juiz-federal-da-vara-federal-da-c71983d4.pdf",
+      "chunks": 45,
+      "caracteres": 56536
+    },
+    {
+      "arquivo": "022-processo-0004928-04.2014.8.14.0045---apelacao-civel-c1e685cc.pdf",
+      "chunks": 29,
+      "caracteres": 27568
+    },
+    {
+      "arquivo": "023-superior-tribunal-de-justic---consultor-juridico-4ba6e8d6.pdf",
+      "chunks": 29,
+      "caracteres": 16877
+    },
+    {
+      "arquivo": "024-sentenca-julgou-parcialmente-procedente-a-acao-a-fim-de-bd98da5b.pdf",
+      "chunks": 27,
+      "caracteres": 15578
+    },
+    {
+      "arquivo": "025-sexta-camara-civel-0808022-39.2021.8.10.0029-apelante-926fc87e.pdf",
+      "chunks": 19,
+      "caracteres": 16578
+    },
+    {
+      "arquivo": "026-do-valor-das-indenizacoes-por-dano-moral---uma-proposta-inovadora-5e6b7c9d.pdf",
+      "chunks": 60,
+      "caracteres": 54859
+    },
+    {
+      "arquivo": "README.txt",
+      "chunks": 1,
+      "caracteres": 137
+    }
+  ],
+  "erros": [],
+  "chroma": {
+    "juridico_docs": 934,
+    "juridico_refinamento": 0
+  }
+}

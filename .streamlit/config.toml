@@ -1,0 +1,7 @@
+# Configuração local do Streamlit (streamlit_app.py)
+[browser]
+gatherUsageStats = false
+
+[server]
+# Não abre o browser automaticamente (útil com run_dev.py); abra manualmente a URL impressa.
+headless = true

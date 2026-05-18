@@ -1,0 +1,43 @@
+{
+  "tribunal": "tjsp",
+  "tipo": "falta_pagamento",
+  "total_aproximado": "10000+",
+  "retornados": 2,
+  "processos": [
+    {
+      "numero_processo": "00060429520258260032",
+      "classe_codigo": 156,
+      "classe_nome": "Cumprimento de sentença",
+      "grau": "JE",
+      "data_ajuizamento": "20250703124314",
+      "nivel_sigilo": 0,
+      "orgao_codigo": 59956,
+      "orgao_nome": "Juízo Titular I - Vara do Juizado Especial Cível da Comarca de Araçatuba",
+      "assuntos": [
+        {
+          "codigo": 9596,
+          "nome": "Prestação de Serviços"
+        }
+      ],
+      "score": null
+    },
+    {
+      "numero_processo": "40033115820258260032",
+      "classe_codigo": 12154,
+      "classe_nome": "Execução de Título Extrajudicial",
+      "grau": "G1",
+      "data_ajuizamento": "20251104091522",
+      "nivel_sigilo": 0,
+      "orgao_codigo": 9293,
+      "orgao_nome": "Juízo Titular I - 2ª Vara Cível da Comarca de Araçatuba",
+      "assuntos": [
+        {
+          "codigo": 7619,
+          "nome": "Consórcio"
+        }
+      ],
+      "score": null
+    }
+  ],
+  "aviso": "Metadados públicos DataJud — sem petição inicial. Não redistribuir processos sigilosos (nivel_sigilo > 0)."
+}

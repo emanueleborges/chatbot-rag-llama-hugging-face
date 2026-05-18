@@ -1,0 +1,19 @@
+{
+  "descricao": "Base de conhecimento inicial — petições de exemplo para indexação RAG.",
+  "peticoes": [
+    {
+      "id": "exemplo_ruim",
+      "resultado": "DEU RUIM",
+      "classe_processual": "indenizacao",
+      "foro": "TJSP",
+      "texto": "EXCELENTÍSSIMO SENHOR JUIZ\n\nO autor vem pedir indenização porque comprou um produto defeituoso e a loja não resolveu.\n\nPedidos: que a ré pague tudo.\n\nSão Paulo, 2024."
+    },
+    {
+      "id": "exemplo_bom",
+      "resultado": "DEU BOM",
+      "classe_processual": "indenizacao",
+      "foro": "TJSP",
+      "texto": "EXCELENTÍSSIMO SENHOR DOUTOR JUIZ DE DIREITO DA 1ª VARA CÍVEL\n\nMARIA SANTOS, brasileira, CPF 000.111.222-33, por advogado, propõe AÇÃO DE INDENIZAÇÃO em face de LOJA S.A., CNPJ 00.000.000/0001-00.\n\nI — DOS FATOS\n\nEm 10/01/2024 adquiriu geladeira por R$ 4.200,00. Defeito grave em 15/03/2024; a ré demorou 90 dias para vistoria.\n\nII — DO DIREITO\n\nCDC arts. 2º, 3º, 6º, VIII e 18. STJ, REsp 1.634.851/RJ — danos morais por descaso no pós-venda.\n\nIII — DOS PEDIDOS\n\nRequer citação, inversão do ônus da prova, R$ 4.200,00 materiais, R$ 10.000,00 morais, custas e honorários.\n\nValor da causa: R$ 14.200,00."
+    }
+  ]
+}

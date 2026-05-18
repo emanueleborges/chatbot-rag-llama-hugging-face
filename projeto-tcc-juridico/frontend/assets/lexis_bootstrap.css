@@ -1,0 +1,193 @@
+/* LexisAnalysis — overrides sobre Bootstrap 5 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+
+:root {
+  --bs-primary: #041627;
+  --bs-primary-rgb: 4, 22, 39;
+  --bs-secondary: #775a19;
+  --bs-secondary-rgb: 119, 90, 25;
+  --bs-body-bg: #f8f9fa;
+  --bs-body-font-family: 'Inter', system-ui, sans-serif;
+  --bs-border-radius: 0.5rem;
+  --lex-sidebar-w: 256px;
+  --lex-navbar-h: 64px;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Gradio full-width */
+body, .gradio-container, html {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  background: var(--bs-body-bg) !important;
+}
+.gradio-container .main,
+.gradio-container .main.fillable,
+.gradio-container .app,
+div.wrap, div.container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+/* Sidebar fixa */
+.lex-sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+}
+body.lex-sidebar-open .lex-sidebar-overlay { display: block; }
+
+.lex-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--lex-sidebar-w);
+  height: 100vh;
+  z-index: 1050;
+  background: #fff;
+  border-right: 1px solid var(--bs-border-color);
+}
+.lex-sidebar .nav-link { color: var(--bs-secondary-color); font-weight: 500; }
+.lex-sidebar .nav-link.active {
+  background: #d2e4fb;
+  color: #0b1d2d;
+  font-weight: 700;
+  border-right: 4px solid var(--bs-primary);
+  border-radius: 0.375rem;
+}
+
+.lex-main {
+  margin-left: var(--lex-sidebar-w);
+  min-height: 100vh;
+  padding-top: var(--lex-navbar-h);
+}
+
+.lex-navbar {
+  position: fixed;
+  top: 0;
+  left: var(--lex-sidebar-w);
+  right: 0;
+  height: var(--lex-navbar-h);
+  z-index: 1030;
+  background: #fff !important;
+}
+
+.lex-content { padding: 1.5rem; max-width: 1400px; }
+
+/* Cards dos passos */
+.lex-step-card {
+  min-height: 420px;
+  height: 100%;
+}
+.lex-step-card .card-body { display: flex; flex-direction: column; }
+
+.lex-kb-scroll {
+  flex: 1;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+/* Upload zone */
+.lex-upload-zone {
+  border: 2px dashed var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  padding: 2rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lex-upload-zone:hover {
+  border-color: var(--bs-primary);
+  background: rgba(4, 22, 39, 0.03);
+}
+
+/* Score hero */
+.score-hero.score-excelente { border-left: 4px solid #22c55e; }
+.score-hero.score-bom { border-left: 4px solid #3b82f6; }
+.score-hero.score-regular { border-left: 4px solid #f59e0b; }
+.score-hero.score-baixo { border-left: 4px solid #ef4444; }
+.score-hero .score-value {
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Merriweather', Georgia, serif;
+  color: var(--bs-primary);
+}
+
+/* Tabs custom (esconde nav nativa do Gradio) */
+.tabs-custom > .tab-nav { display: none !important; }
+.lex-results-tabs .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--bs-secondary-color);
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.lex-results-tabs .nav-link {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.lex-results-tabs .nav-link.active {
+  color: var(--bs-primary);
+  border-bottom: 2px solid var(--bs-primary);
+}
+
+/* Gradio buttons */
+.gradio-container .gr-button-primary,
+.gradio-container button.primary {
+  background: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+}
+
+/* Prose markdown */
+.lex-prose { font-size: 0.9375rem; line-height: 1.6; }
+
+/* Tablet: sidebar compacta */
+@media (max-width: 1024px) {
+  :root { --lex-sidebar-w: 72px; }
+  .lex-sidebar .sidebar-brand-text,
+  .lex-sidebar .nav-label,
+  .lex-sidebar .sidebar-cta-label,
+  .lex-sidebar .footer-label { display: none !important; }
+  .lex-sidebar .btn-cta span.material-symbols-outlined { margin: 0 !important; }
+}
+
+/* Mobile: drawer */
+@media (max-width: 768px) {
+  :root { --lex-sidebar-w: 0px; }
+  .lex-sidebar {
+    transform: translateX(-100%);
+    width: min(280px, 85vw);
+    transition: transform 0.25s ease;
+  }
+  body.lex-sidebar-open .lex-sidebar { transform: translateX(0); }
+  .lex-navbar { left: 0 !important; }
+  .lex-main { margin-left: 0 !important; }
+  .lex-content { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .lex-navbar .navbar-search { display: none !important; }
+}
